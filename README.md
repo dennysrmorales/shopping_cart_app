@@ -1,1 +1,3 @@
-# dennysrmorales.github.io
+# Shopping Cart Application
+
+This miniature shopping cart system lists products from a REST API. I implemented the design using HTML, CSS, and developed an API that serves data from a database. The user can select a category from the drop-down list. Each product has an “Add to Cart” button to add a product to shopping cart. Each item in the shopping cart has the option to change the quantity of that item. The clear button in the cart deletes all items in cart and the checkout button posts list of products and their quantities to Cart API. The Cart API returns an id if insertion to database is successful.
