@@ -1,0 +1,166 @@
+<html>
+	<head>
+		<title>Shopping Cart</title>
+	</head>
+	
+	<body>
+
+		<header style="background-color: #00688B;
+					   color: #fff;
+					   font-size: 50px;
+					   text-align: center;">
+			Shopping Cart Application
+				
+		</header>
+
+		<br>
+		<br>
+		<h1>Product Search</h1>
+		<strong>Search By Category: </strong>
+
+		<select class="btn"  [(ngModel)]="selectedNav">
+	        <option [value]="cat.name" 
+	            *ngFor="let cat of categories">
+	            {{cat.name}}
+	        </option>
+	   	</select>
+	   	<br> 
+	   	<br> 
+	   	<br>
+
+
+		<div class="container-fluid">
+		  <div class="row">
+		    <div class="col-sm-8">
+		    	
+		    	<div *ngIf="selectedNav === 'Furniture'">
+	   				<strong>Results: </strong>
+	   				<br>
+	   				<br>
+					<div class="container" *ngFor="let product of furn_prods;let i = index">
+						<table id="cart" class="table table-hover table-condensed">
+		    				<thead>
+								<tr>
+									<th style="width:50%">Product</th>
+									<th style="width:10%">Price</th>
+									<th style="width:10%"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td data-th="Product">
+										<div class="row">
+											<div class="col-sm-6 hidden-xs"><img src="{{product.thumbnail}}" width="150px" height="150px" alt="..." class="img-responsive"/></div>
+											<div class="col-sm-2">
+												<h4 class="nomargin">{{product.name}}</h4>
+											</div>
+										</div>
+									</td>
+									<td data-th="Price">${{product.price}}</td>
+								</tr>
+							</tbody>
+
+							<tfoot>
+								<tr>
+									<td colspan="2" class="hidden-xs"></td>
+									<td><button (click)="addToCart(product, amounts, i)" class="btn btn-success btn-block">Add To Cart</button></td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+
+				<div *ngIf="selectedNav === 'Foods'">
+	   				<strong>Results: </strong>
+	   				<br>
+	   				<br>
+					<div class="container" *ngFor="let product of food_prods;let i = index">
+						<table id="cart" class="table table-hover table-condensed">
+		    				<thead>
+								<tr>
+									<th style="width:50%">Product</th>
+									<th style="width:10%">Price</th>
+									<th style="width:10%"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td data-th="Product">
+										<div class="row">
+											<div class="col-sm-6 hidden-xs"><img src="{{product.thumbnail}}" width="150px" height="150px" alt="..." class="img-responsive"/></div>
+											<div class="col-sm-2">
+												<h4 class="nomargin">{{product.name}}</h4>
+											</div>
+										</div>
+									</td>
+									<td data-th="Price">${{product.price}}</td>
+								</tr>
+							</tbody>
+
+							<tfoot>
+								<tr>
+									<td colspan="2" class="hidden-xs"></td>
+									<td><button (click)="addToCart(product, amounts, i)" class="btn btn-success btn-block">Add To Cart</button></td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+
+
+		    </div>
+
+		    <div class="col-sm-4"  style="width: 320px;
+	    								  padding: 10px;
+	    								  border: 5px solid gray;
+	    								  margin: 0; 
+	    								  text-align: 
+	    								  center;">
+	    		<div id="cart"><strong><h3>Your Cart</h3></strong></div>
+
+	    	<hr>
+
+
+
+	    		<div class="container" *ngFor="let product of added_products;let i = index">
+	    			<div class="row">
+					  <div class="col-sm-4"><img src="{{product.thumbnail}}" height="100px" width="100px"></div>
+					  <div class="col-sm-8">
+					  	<p>{{product.name}}</p>
+					  	<p>${{product.price}}</p>
+					  	
+					  	<input type="number" class="form-control text-center" style="width: 70px; float:right;" value="1" (change)="addSubTotals(product, amounts, i)" [(ngModel)]="amounts[i]">
+					  </div>
+					</div>
+
+					<div class="row" >SubTotal: ${{product.price * amounts[i]}}
+
+	    			</div>
+					<hr>
+				  	
+				</div>
+
+				<div id="checkout_total" class="row">
+					<h6>Total: ${{total}}</h6>
+				</div>
+
+				<div class="row">					
+			    	<div class="col"><button (click)="clear()" class="btn btn-success btn-block">Clear</button></div>
+			    	
+			    	<div class="col"><button (click)="addNewCartEntry($event)" class="btn btn-success btn-block">Checkout</button></div>
+
+			  	</div>
+			  		
+
+		    </div>
+
+		  </div>
+		</div>
+		
+
+
+	</body>
+
+</html>
+
+
